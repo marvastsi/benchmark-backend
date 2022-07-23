@@ -35,8 +35,8 @@ class RouterConfig {
     }
 
     setupFileRoutes() {
-        this.routes.post('/file/upload', this.uploadMiddleware.single('file'), this.fileHandlerController.postUploadFile);
-        this.routes.get('/file/download/:name', this.fileHandlerController.getDownloadFile);
+        this.routes.post('/file/upload', this.uploadMiddleware.single('file'), this.fileHandlerController.uploadFile);
+        this.routes.get('/file/download/:name', this.fileHandlerController.downloadFile);
         this.routes.get('/file/listFiles', this.fileHandlerController.getListFiles);
     }
 
