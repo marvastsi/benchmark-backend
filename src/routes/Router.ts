@@ -4,6 +4,7 @@ import env from '../config/env';
 
 import UploadConfig from '../config/UploadConfig';
 import FileHandlerController from '../controllers/FileHandlerController';
+import LoginController from '../controllers/LoginController';
 import MessageController from '../controllers/MessageController';
 
 const maxSize = Number(env.MAX_SIZE || 2 * 1024 * 1024);
@@ -14,6 +15,7 @@ class RouterConfig {
     routes = express.Router();
     fileHandlerController = new FileHandlerController();
     mensagemController = new MessageController();
+    loginController = new LoginController();
 
     constructor() {
         this.uploadMiddleware = Multer({
@@ -23,6 +25,7 @@ class RouterConfig {
         this.setupDefaultRoutes();
         this.setupFileRoutes();
         this.setupMessageRoutes();
+        this.setupAuthRoutes();
     }
 
     setupDefaultRoutes() {
@@ -43,6 +46,10 @@ class RouterConfig {
     setupMessageRoutes() {
         this.routes.post('/message/save', this.mensagemController.save);
         this.routes.get('/message/find', this.mensagemController.find);
+    }
+
+    setupAuthRoutes() {
+        this.routes.post('/login', this.loginController.authenticate);
     }
 }
 

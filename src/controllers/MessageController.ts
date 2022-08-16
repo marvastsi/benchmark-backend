@@ -8,7 +8,7 @@ class MessageController {
             console.log(message);
             return response.status(HttpStatus.ACCEPTED).json({ message: "Message created" });
         } catch (error) {
-            return response.status(HttpStatus.INTERNAL_SERVER_ERROR);
+            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
         }
     }
 
@@ -32,7 +32,7 @@ class MessageController {
             }
             return response.status(HttpStatus.OK).json([message]);
         } catch (error) {
-            return response.status(HttpStatus.INTERNAL_SERVER_ERROR);
+            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
         }
     }
 }

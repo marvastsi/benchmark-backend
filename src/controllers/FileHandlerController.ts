@@ -18,7 +18,7 @@ class FileHandlerController {
         try {
             return response.status(HttpStatus.CREATED).json({ fileInfo });
         } catch (error) {
-            return response.status(HttpStatus.INTERNAL_SERVER_ERROR);
+            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
 
         }
     }
