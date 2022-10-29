@@ -14,7 +14,8 @@ class LoginService {
     login(loginInfo: Credentials): Token {
         const { username, password } = loginInfo;
         try {
-            if (!bcrypt.compareSync(password, this._PASSWORD)) {
+            if (this.isBlank(username) ||
+                !bcrypt.compareSync(password, this._PASSWORD)) {
                 throw new Error("UNAUTHORIZED");
             }
 
@@ -26,6 +27,10 @@ class LoginService {
             console.log(e);
             throw e;
         }
+    }
+
+    private isBlank(value: String): Boolean {
+        return !(value && value.trim())
     }
 }
 
