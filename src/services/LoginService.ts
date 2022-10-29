@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import LoginInfo from "../models/LoginInfo";
+import Credentials from "../models/Credentials";
 
 import Jwt from '../auth/Jwt';
 import Token from '../models/Token';
@@ -11,7 +11,7 @@ class LoginService {
      * @param loginInfo Login information
      * @returns jwt token as String
      */
-    login(loginInfo: LoginInfo): Token {
+    login(loginInfo: Credentials): Token {
         const { username, password } = loginInfo;
         try {
             if (!bcrypt.compareSync(password, this._PASSWORD)) {

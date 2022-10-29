@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import HttpStatus from 'http-status';
-import LoginInfo from '../models/LoginInfo';
+import Credentials from '../models/Credentials';
 
 import LoginService from '../services/LoginService';
 

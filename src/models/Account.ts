@@ -1,15 +1,14 @@
-import Address from "./Address";
-import Phone from "./Phone";
-import User from "./User";
-
 interface Account {
-    id: number;
-    user: User;
-    address: Address;
-    phone: Phone;
+    id: String;
+    firstaName: string;
+    lastName: string;
     email: string;
+    phoneCountryCode: string;
+    phoneNumber: string;
     notification: boolean;
     active: boolean;
+    username: string;
+    password: string;
 }
 
 export default Account;
