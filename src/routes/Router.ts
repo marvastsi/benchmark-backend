@@ -7,7 +7,7 @@ import FileHandlerController from '../controllers/FileHandlerController';
 import LoginController from '../controllers/LoginController';
 import AccountController from '../controllers/AccountController';
 
-const maxSize = Number(env.MAX_SIZE || 2 * 1024 * 1024);
+const maxSize = Number(env.MAX_SIZE || 5 * 1024 * 1024);
 
 class RouterConfig {
     uploadConfig = new UploadConfig();
@@ -52,6 +52,5 @@ class RouterConfig {
         this.routes.post('/login', this.loginController.authenticate);
     }
 }
-
 
 export default RouterConfig;

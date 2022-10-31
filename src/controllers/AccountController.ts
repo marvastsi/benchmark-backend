@@ -18,7 +18,7 @@ class AccountController {
 
     find(request: Request, response: Response) {
         try {
-            return response.status(HttpStatus.OK).send();
+            return response.status(HttpStatus.OK).send([]);
         } catch (error) {
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
         }

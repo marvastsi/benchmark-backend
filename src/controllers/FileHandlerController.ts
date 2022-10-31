@@ -10,12 +10,13 @@ const baseDir = path.resolve(__dirname, '..', '..', 'public', 'files');
 class FileHandlerController {
 
     async uploadFile(request: Request, response: Response) {
-        const filename = request.file?.filename;
+        const fileName = request.file?.filename;
         const fileInfo = {
-            name: filename,
-            url: baseUrl + filename,
+            name: fileName,
+            url: baseUrl + fileName,
         };
         try {
+            console.log(`upload fileName =>  ${fileName}`);
             return response.status(HttpStatus.CREATED).json({ fileInfo });
         } catch (error) {
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
@@ -25,6 +26,7 @@ class FileHandlerController {
 
     downloadFile(request: Request, response: Response) {
         const fileName = request.params.name;
+        console.log(`Download fileInfo=>  ${fileName}`);
         return response.download(`${baseDir}/${fileName}`, fileName, (err) => {
             if (err) {
                 response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
