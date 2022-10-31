@@ -16,7 +16,7 @@ class FileHandlerController {
             url: baseUrl + fileName,
         };
         try {
-            console.log(`upload fileName =>  ${fileName}`);
+            console.log(`Upload fileName =>  ${fileName}`);
             return response.status(HttpStatus.CREATED).json({ fileInfo });
         } catch (error) {
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
