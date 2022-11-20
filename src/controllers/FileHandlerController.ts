@@ -6,25 +6,27 @@ import env from '../config/env';
 import FileInfo from '../models/FileInfo';
 
 const baseUrl = `${env.BASE_URL}:${env.SERVER_PORT}/`;
-const baseDir = path.resolve(__dirname, '..', '..', 'public', 'uploads');
+const baseDir = path.resolve(__dirname, '..', '..', 'public', 'files');
 class FileHandlerController {
 
-    async postUploadFile(request: Request, response: Response) {
-        const filename = request.file?.filename;
+    async uploadFile(request: Request, response: Response) {
+        const fileName = request.file?.filename;
         const fileInfo = {
-            name: filename,
-            url: baseUrl + filename,
+            name: fileName,
+            url: baseUrl + fileName,
         };
         try {
-            return response.status(HttpStatus.CREATED).json({ fileInfo });
+            console.log(`Upload file {name: ${fileInfo.name}, url: ${fileInfo.url}`);
+            return response.status(HttpStatus.CREATED).json(fileInfo);
         } catch (error) {
-            return response.status(HttpStatus.INTERNAL_SERVER_ERROR);
+            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
 
         }
     }
 
-    getDownloadFile(request: Request, response: Response) {
+    downloadFile(request: Request, response: Response) {
         const fileName = request.params.name;
+        console.log(`Download fileName =>  ${fileName}`);
         return response.download(`${baseDir}/${fileName}`, fileName, (err) => {
             if (err) {
                 response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
@@ -52,4 +54,5 @@ class FileHandlerController {
         });
     }
 }
+
 export default FileHandlerController;
