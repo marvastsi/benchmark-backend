@@ -8,4 +8,5 @@ export = {
     SECRET: process.env.SECRET,
     ALGORITHM: process.env.ALGORITHM,
     EXPIRATION: process.env.EXPIRATION,
+    BASE_CONTEXT: process.env.BASE_CONTEXT
   };

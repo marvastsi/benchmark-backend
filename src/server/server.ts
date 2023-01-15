@@ -9,6 +9,7 @@ import env from '../config/env';
 
 const port = env.SERVER_PORT;
 const baseUrl = env.BASE_URL;
+const baseContext = env.BASE_CONTEXT || '/api';
 
 class Server {
     public app: express.Application;
@@ -31,7 +32,7 @@ class Server {
     }
 
     setupRoutes() {
-        this.app.use('/api', this.routerConfig.routes);
+        this.app.use(baseContext, this.routerConfig.routes);
     }
 
     setupErrorHandler() {
@@ -48,7 +49,7 @@ class Server {
     start() {
         try {
             this.httpServer.listen(port);
-            console.log(`Server is running at ${baseUrl}:${port}`);
+            console.log(`Server is running at ${baseUrl}:${port}${baseContext}`);
         } catch (error) {
             console.log(error);
             process.exit(1);
