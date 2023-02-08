@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 class AccountService {
 
-    save(account: Account): String {
+    save(account: Account): Account {
         try {
             let savedAccount = {
                 id: uuidv4(),
@@ -17,8 +17,7 @@ class AccountService {
                 username: account.username,
                 password: account.password,
             };
-            console.log(`Saved Account: ${savedAccount}`)
-            return savedAccount.id;
+            return savedAccount;
         } catch (e) {
             console.log(e);
             throw e;

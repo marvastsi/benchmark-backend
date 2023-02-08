@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import HttpStatus from 'http-status';
+import moment from 'moment';
 import AccountService from '../services/AccountService';
 
 class AccountController {
@@ -8,9 +9,11 @@ class AccountController {
             const account = {
                 ...request.body
             }
-            console.log(account);
-            const accountId = AccountService.save(account)
-            return response.status(HttpStatus.ACCEPTED).json({accountId});
+            const accountSaved = AccountService.save(account)
+
+            console.log(`[${moment().format()}]: Saved Account: ${JSON.stringify(accountSaved)}`);
+            
+            return response.status(HttpStatus.ACCEPTED).json({accountId: accountSaved.id});
         } catch (error) {
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
         }

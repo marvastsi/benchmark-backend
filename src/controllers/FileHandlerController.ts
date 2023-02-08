@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import fs from 'fs';
 import HttpStatus from 'http-status';
+import moment, { now } from 'moment';
 import path from 'path';
 import env from '../config/env';
 import FileInfo from '../models/FileInfo';
@@ -16,7 +17,10 @@ class FileHandlerController {
             url: baseUrl + fileName,
         };
         try {
-            console.log(`Upload file {name: ${fileInfo.name}, url: ${fileInfo.url}`);
+            console.log(
+                `[${moment().format()}]: Upload file ${JSON.stringify(fileInfo)}`
+            );
+
             return response.status(HttpStatus.CREATED).json(fileInfo);
         } catch (error) {
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
@@ -26,7 +30,7 @@ class FileHandlerController {
 
     downloadFile(request: Request, response: Response) {
         const fileName = request.params.name;
-        console.log(`Download fileName =>  ${fileName}`);
+        console.log(`[${moment().format()}]: Download fileName =>  ${fileName}`);
         return response.download(`${baseDir}/${fileName}`, fileName, (err) => {
             if (err) {
                 response.status(HttpStatus.INTERNAL_SERVER_ERROR).send({

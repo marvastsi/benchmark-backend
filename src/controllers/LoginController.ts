@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
 import HttpStatus from 'http-status';
-import Credentials from '../models/Credentials';
+import moment from 'moment';
 
 import LoginService from '../services/LoginService';
 
 class LoginController {
     authenticate(request: Request, response: Response) {
         try {
-            const token = LoginService.login(request.body);
-            console.log(`Login successful`)
+            const credentials = {
+                ...request.body
+            }
+            const token = LoginService.login(credentials);
+            console.log(`[${moment().format()}]: Login successful: ${credentials.username} `);
             return response.status(HttpStatus.OK).json(token);
         } catch (error) {
             console.log(`Login Error`)
