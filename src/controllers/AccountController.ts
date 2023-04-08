@@ -13,7 +13,7 @@ class AccountController {
 
             console.log(`[${moment().format()}]: Saved Account: ${JSON.stringify(accountSaved)}`);
             
-            return response.status(HttpStatus.ACCEPTED).json({accountId: accountSaved.id});
+            return response.status(HttpStatus.CREATED).json({accountId: accountSaved.id});
         } catch (error) {
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
         }
