@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import fs from 'fs';
 import HttpStatus from 'http-status';
-import moment, { now } from 'moment';
+import moment from 'moment';
 import path from 'path';
 import env from '../config/env';
 import FileInfo from '../models/FileInfo';
